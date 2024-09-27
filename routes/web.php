@@ -3,18 +3,24 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\SurveyController;
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
+Route::get('/user', function () {
+    return view('user.dashboard');
 })->middleware(['auth', 'verified','rolemanager:user'])->name('dashboard');
 
 Route::get('/business', function () {
-    return view('business');
+    return view('business.dashboard');
 })->middleware(['auth', 'verified','rolemanager:business'])->name('business');
+
+Route::get('/business/create', [SurveyController::class, 'create'])
+    ->middleware(['auth', 'verified', 'rolemanager:business'])
+    ->name('business.create-survey');
+
 
 Route::get('/admin', function () {
     return view('admin');
@@ -30,6 +36,14 @@ Route::middleware('auth')->group(function () {
 Route::middleware(['auth'])->group(function () {
     Route::get('/protect', [DashboardController::class, 'protectedMethod'])->name('protect');
 });
+
+
+//SURVEY FUNCTIONALITY 
+
+//CREATE SURVEY
+
+Route::post('business/create', [SurveyController::class, 'store'])->name('survey.store');
+
 
 
 require __DIR__.'/auth.php';

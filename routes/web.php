@@ -21,6 +21,7 @@ Route::get('/business/create', [SurveyController::class, 'create'])
     ->middleware(['auth', 'verified', 'rolemanager:business'])
     ->name('business.create-survey');
 
+    
 
 Route::get('/admin', function () {
     return view('admin');
@@ -44,6 +45,14 @@ Route::middleware(['auth'])->group(function () {
 
 Route::post('business/create', [SurveyController::class, 'store'])->name('survey.store');
 
+//vjew surveys 
 
+Route::get('/business/viewsurvey', [SurveyController::class, 'viewsurvey'])
+    ->middleware(['auth', 'verified', 'rolemanager:business'])
+    ->name('business.viewsurvey');
+
+    Route::get('/surveys/{id}', [SurveyController::class, 'show'])
+    ->middleware(['auth', 'verified', 'rolemanager:admin']) // Add rolemanager:admin middleware here
+    ->name('surveys.show');
 
 require __DIR__.'/auth.php';

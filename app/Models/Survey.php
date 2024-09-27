@@ -14,6 +14,8 @@ class Survey extends Model
         'questions',
         'question_type',
         'options',
+        'user_id'
+        
     ];
 
     protected $casts = [

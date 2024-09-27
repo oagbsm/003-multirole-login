@@ -10,10 +10,11 @@ class CreateSurveysTable extends Migration
     {
         Schema::create('surveys', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade'); // user_id
             $table->string('survey_name');
-            $table->json('questions'); // Store questions as JSON
-            $table->json('question_type'); // Store question types as JSON
-            $table->json('options')->nullable(); // Store options as JSON (optional)
+            $table->text('questions');
+            $table->text('question_type');
+            $table->text('options');
             $table->timestamps();
         });
     }

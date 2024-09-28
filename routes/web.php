@@ -51,8 +51,11 @@ Route::get('/business/viewsurvey', [SurveyController::class, 'viewsurvey'])
     ->middleware(['auth', 'verified', 'rolemanager:business'])
     ->name('business.viewsurvey');
 
-    Route::get('/surveys/{id}', [SurveyController::class, 'show'])
-    ->middleware(['auth', 'verified', 'rolemanager:admin']) // Add rolemanager:admin middleware here
-    ->name('surveys.show');
+    Route::get('/business/viewsurvey/{id}', [SurveyController::class, 'viewsurveydetail'])
+    ->middleware(['auth', 'verified', 'rolemanager:business']) // Add rolemanager:admin middleware here
+    ->name('business.view-survey-detail');
 
+    Route::delete('/surveys/{id}', [SurveyController::class, 'destroy'])
+    ->middleware(['auth', 'verified', 'rolemanager:business']) // Adjust as needed
+    ->name('surveys.destroy');
 require __DIR__.'/auth.php';

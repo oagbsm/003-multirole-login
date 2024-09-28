@@ -33,8 +33,13 @@
                             <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{{ $survey->id }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">{{ $survey->survey_name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
-                                <a href="{{ route('surveys.show', $survey->id) }}" class="text-blue-600 hover:text-blue-900">View</a>
+                                <a href="{{ route('business.view-survey-detail', $survey->id) }}" class="text-blue-600 hover:text-blue-900">View</a>
                                 <!-- Add additional actions here if needed -->
+                                <form action="{{ route('surveys.destroy', $survey->id) }}" method="POST" class="inline-block" onsubmit="return confirm('Are you sure you want to delete this survey?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="text-red-600 hover:text-red-800 ml-4">Delete</button>
+                            </form>
                             </td>
                         </tr>
                     @endforeach

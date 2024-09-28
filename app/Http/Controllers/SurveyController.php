@@ -18,6 +18,26 @@ class SurveyController extends Controller
     return view('surveys.show', compact('survey'));
 }
 
+
+public function viewsurveydetail($id)
+{
+    $survey = Survey::findOrFail($id);
+    return view('business.view-survey-detail', compact('survey'));
+}
+
+
+public function destroy($id)
+{
+    // Retrieve the survey by its ID
+    $survey = Survey::findOrFail($id);
+
+    // Delete the survey
+    $survey->delete();
+
+    // Redirect back to the surveys list with a success message
+    return redirect()->back()->with('success', 'Survey deleted successfully.');
+}
+
     public function create()
     {
                 // Get the currently authenticated user

@@ -9,9 +9,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/user', function () {
-    return view('user.dashboard');
-})->middleware(['auth', 'verified','rolemanager:user'])->name('dashboard');
+
+Route::get('/user', [SurveyController::class, 'userviewsurvey']) // Pointing to the index method in SurveyController
+    ->middleware(['auth', 'verified', 'rolemanager:user'])
+    ->name('dashboard');
+
+
+    Route::get('/survey/{id}', [SurveyController::class, 'show'])
+    ->middleware(['auth', 'verified', 'rolemanager:user'])
+    ->name('survey.show');
+
+Route::post('/survey/{id}/submit', [SurveyController::class, 'submitAnswers'])->name('survey.submit');
+
 
 Route::get('/business', function () {
     return view('business.dashboard');
@@ -60,6 +69,8 @@ Route::get('/business/viewsurvey', [SurveyController::class, 'viewsurvey'])
     ->name('surveys.destroy');
 
     Route::get('/business/analytics', [SurveyController::class, 'analytics'])->name('business.view-analytics');
+//view surveys from user side
+
 
 
 require __DIR__.'/auth.php';

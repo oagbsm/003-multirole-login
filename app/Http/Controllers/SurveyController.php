@@ -26,6 +26,20 @@ public function viewsurveydetail($id)
 }
 
 
+public function analytics()
+{
+// Retrieve all survey responses
+// $responses = SurveyResponse::all(); // Assuming you have a SurveyResponse model
+
+// Pass the responses to the view
+// return view('business.analytics', [
+//     'responses' => $responses,
+// ]);
+
+return view('business.view-analytics');
+}
+
+
 public function destroy($id)
 {
     // Retrieve the survey by its ID

@@ -58,4 +58,8 @@ Route::get('/business/viewsurvey', [SurveyController::class, 'viewsurvey'])
     Route::delete('/surveys/{id}', [SurveyController::class, 'destroy'])
     ->middleware(['auth', 'verified', 'rolemanager:business']) // Adjust as needed
     ->name('surveys.destroy');
+
+    Route::get('/business/analytics', [SurveyController::class, 'analytics'])->name('business.view-analytics');
+
+
 require __DIR__.'/auth.php';
